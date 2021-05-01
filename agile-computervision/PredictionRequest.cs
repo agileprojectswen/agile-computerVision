@@ -16,7 +16,7 @@ namespace agile_computervision
             client.DefaultRequestHeaders.Add("Prediction-Key", "49096b646eab4c00b877e1c4431549b2");
 
             // Prediction URL - replace this example URL with your valid Prediction URL.
-            string url = "https://eastus2.api.cognitive.microsoft.com/customvision/v3.0/Prediction/bc07bb8e-1bd6-4382-ac08-45a9cf351184/classify/iterations/Iteration10/image";
+            string url = "https://eastus2.api.cognitive.microsoft.com/customvision/v3.0/Prediction/bc07bb8e-1bd6-4382-ac08-45a9cf351184/classify/iterations/Iteration12/image";
 
             // Request body. Try this sample with a locally stored image.
             byte[] byteData = FileHelpers.GetImageAsByteArray(imageFilePath);
@@ -38,7 +38,7 @@ namespace agile_computervision
                 Console.WriteLine($"Processing {file} ");
                 response = ImagePrediction.MakePredictionRequestAsync(file.ToString()).Result;
 
-                if (!(response.IsSuccessStatusCode)) { Console.WriteLine("Error Response, File Not Processed"); }
+                if (!(response.IsSuccessStatusCode)) { GenericUtilities.UserAlertMessage($"UserMessage.InvalidFileFormatErrMsg{file}"); Console.WriteLine("Error Response, File Not Processed"); }
                 else
                 {
 
@@ -46,17 +46,30 @@ namespace agile_computervision
 
                     Console.WriteLine($"Response:{response.Content.ReadAsStringAsync().Result.ToString()}");
 
-                    if (predictionResults.predictions[0].probability > 0.6 && predictionResults.predictions[1].probability < 0.1)
-                    {
-                        FileHelpers.CopyFiles(file, "Healthy");
-                    }
-                    else
-                    {
-                        FileHelpers.CopyFiles(file, "Diseased");
-                    }
+                    predictionResults.predictions.ForEach(item => Predict(item.probability, item.tagName, file));
+
                     Console.WriteLine($"Please View the Output folder for Results.");
                 }
             }
         }
+
+        public static bool Predict(dynamic probability, string tagName, string sourcePath)
+        {
+            if (probability > 0.6)
+            {
+                FileHelpers.CopyFiles(sourcePath, tagName);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public class UserMessage
+    {
+
+        public static readonly string FileFormatMessage = "Currently we are supporting '.jpg' file format, all other formats will be excluded from processing.";
+
+        public static readonly string InvalidFileFormatErrMsg = $"Invalid File Format Found";
+
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-
 
 namespace agile_computervision
 {
@@ -12,6 +9,9 @@ namespace agile_computervision
         {
             /*Clear Results From Ouput Folder*/
             FileHelpers.ClearResults();
+
+            /*Warning Message*/
+            GenericUtilities.UserAlertMessage(UserMessage.FileFormatMessage);
 
             /*Read Image From Input Folder*/
             Console.WriteLine("Retrieving Images from the Input Folder.......");
@@ -25,4 +25,5 @@ namespace agile_computervision
             ImagePrediction.ProcessImages(files);
         }
     }
+
 }

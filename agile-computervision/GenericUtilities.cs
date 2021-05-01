@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Windows;
+using Newtonsoft.Json;
 namespace agile_computervision
 {
     public class GenericUtilities
@@ -8,7 +9,15 @@ namespace agile_computervision
         {
             return JsonConvert.DeserializeObject<T>(jsonData);
         }
+
+        public static void UserAlertMessage(string userMsg)
+        {
+
+            //   MessageBox.Show("text", "title", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
     }
+
+
 }
 
 

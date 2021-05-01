@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 
 namespace agile_computervision
 {
@@ -30,8 +30,9 @@ namespace agile_computervision
 
         public static Func<string, bool> DeleteFolder = (outputFolderName) =>
               {
-                  DirectoryInfo directory = new DirectoryInfo($"{projectDirectory}/Output/{outputFolderName}");
+                  DirectoryInfo directory = new DirectoryInfo($"{projectDirectory}/{outputFolderName}");
                   directory.EnumerateFiles().ToList().ForEach(f => f.Delete());
+                  directory.EnumerateDirectories().ToList().ForEach(f => f.EnumerateFiles().ToList().ForEach(sf => sf.Delete()));
                   return true;
               };
 
@@ -51,8 +52,9 @@ namespace agile_computervision
 
         public static void ClearResults()
         {
-            DeleteFolder("Healthy");
-            DeleteFolder("Diseased");
+            DeleteFolder("Output");
         }
+
+
     }
 }
