@@ -11,7 +11,7 @@ namespace agile_computervision
             FileHelpers.ClearResults();
 
             /*Warning Message*/
-            GenericUtilities.UserAlertMessage(UserMessage.FileFormatMessage);
+            GenericUtilities.MessageBox(IntPtr.Zero, UserMessage.FileFormatMessage,"File Format",0);
 
             /*Read Image From Input Folder*/
             Console.WriteLine("Retrieving Images from the Input Folder.......");
@@ -23,6 +23,9 @@ namespace agile_computervision
 
             /*Process Image*/
             ImagePrediction.ProcessImages(files);
+
+            /*Completion Notification*/
+            GenericUtilities.MessageBox(IntPtr.Zero, UserMessage.CompletionMessage, "Execution Status", 0);
         }
     }
 

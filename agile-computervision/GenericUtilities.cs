@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using Newtonsoft.Json;
+using System.Runtime.InteropServices;
+using System;
+
 namespace agile_computervision
 {
     public class GenericUtilities
@@ -13,9 +16,13 @@ namespace agile_computervision
         public static void UserAlertMessage(string userMsg)
         {
 
-            //   MessageBox.Show("text", "title", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            // MessageBox.Show("text", "title");
         }
-    }
+
+     
+    [DllImport("User32.dll", CharSet = CharSet.Unicode)]
+    public static extern int MessageBox(IntPtr h, string message, string title, int type);
+}
 
 
 }

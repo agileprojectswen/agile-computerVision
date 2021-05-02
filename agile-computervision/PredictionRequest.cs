@@ -38,7 +38,7 @@ namespace agile_computervision
                 Console.WriteLine($"Processing {file} ");
                 response = ImagePrediction.MakePredictionRequestAsync(file.ToString()).Result;
 
-                if (!(response.IsSuccessStatusCode)) { GenericUtilities.UserAlertMessage($"UserMessage.InvalidFileFormatErrMsg{file}"); Console.WriteLine("Error Response, File Not Processed"); }
+                if (!(response.IsSuccessStatusCode)) { GenericUtilities.MessageBox(IntPtr.Zero, $"{UserMessage.InvalidFileFormatErrMsg}: {file}", "Bad File Error", 0); Console.WriteLine("Error Response, File Not Processed"); }
                 else
                 {
 
@@ -67,9 +67,11 @@ namespace agile_computervision
     public class UserMessage
     {
 
-        public static readonly string FileFormatMessage = "Currently we are supporting '.jpg' file format, all other formats will be excluded from processing.";
+        public static readonly string FileFormatMessage = "Image files Allowed - '.jpg' format only. All other file formats will be excluded from processing";
 
-        public static readonly string InvalidFileFormatErrMsg = $"Invalid File Format Found";
+        public static readonly string InvalidFileFormatErrMsg = $"The specified file format is invalid, and will not processed.";
+
+        public static readonly string CompletionMessage = $"Image Processing Completed. Please view the Output folder for results";
 
     }
 }
