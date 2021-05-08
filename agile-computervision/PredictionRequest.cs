@@ -40,7 +40,7 @@ namespace agile_computervision
 
                 if (!(response.IsSuccessStatusCode)) { 
                     
-                    GenericUtilities.MessageBox(IntPtr.Zero, $"{UserMessage.InvalidFileFormatErrMsg}: {file}", "Bad File Error", 0);
+                    GenericUtilities.MessageBox(IntPtr.Zero, $"{response.Content.ReadAsStringAsync().Result.ToString()}: {file}", "Bad File Error", 0);
                     Console.WriteLine($"Response:{response.Content.ReadAsStringAsync().Result.ToString()}"); 
                 }
                 else
