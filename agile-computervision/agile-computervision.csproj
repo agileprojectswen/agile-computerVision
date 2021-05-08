@@ -7,12 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Output\" />
     <Folder Include="Output\None\" />
     <Folder Include="Output\Rice_Healthy\" />
     <Folder Include="Output\Wheat_Disease\" />
     <Folder Include="Output\Rice_Disease\" />
-    <Folder Include="Output\Wheat_Healthy\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LaYumba.Functional" Version="0.10.0" />
