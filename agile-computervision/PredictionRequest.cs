@@ -38,7 +38,11 @@ namespace agile_computervision
                 Console.WriteLine($"Processing {file} ");
                 response = ImagePrediction.MakePredictionRequestAsync(file.ToString()).Result;
 
-                if (!(response.IsSuccessStatusCode)) { GenericUtilities.MessageBox(IntPtr.Zero, $"{UserMessage.InvalidFileFormatErrMsg}: {file}", "Bad File Error", 0); Console.WriteLine("Error Response, File Not Processed"); }
+                if (!(response.IsSuccessStatusCode)) { 
+                    
+                    GenericUtilities.MessageBox(IntPtr.Zero, $"{UserMessage.InvalidFileFormatErrMsg}: {file}", "Bad File Error", 0);
+                    Console.WriteLine($"Response:{response.Content.ReadAsStringAsync().Result.ToString()}"); 
+                }
                 else
                 {
 

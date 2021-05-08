@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Output\" />
-    <Folder Include="Input\" />
     <Folder Include="Output\None\" />
     <Folder Include="Output\Rice_Healthy\" />
     <Folder Include="Output\Wheat_Disease\" />
