@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace agile_computervision
@@ -36,6 +37,7 @@ namespace agile_computervision
             foreach (var file in files)
             {
                 Console.WriteLine($"Processing {file} ");
+                Thread.Sleep(1000);
                 response = ImagePrediction.MakePredictionRequestAsync(file.ToString()).Result;
 
                 if (!(response.IsSuccessStatusCode)) { 
